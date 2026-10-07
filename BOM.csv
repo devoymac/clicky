@@ -1,0 +1,19 @@
+Item Name,Quantity,Unit Price (USD),Total Price (USD),Supplier,Link,Notes
+Seeed Studio XIAO ESP32-C3,1,4.99,4.99,Seeed Studio,https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html,MCU with built-in LiPo charger; genuine board
+GC9A01 1.28in Round TFT 240x240 SPI,1,4.48,4.48,AliExpress,https://www.aliexpress.us/item/3256808098235758.html,The pet's animated eye
+GY-521 MPU6050 Accelerometer/Gyro,1,1.88,1.88,AliExpress,https://www.aliexpress.us/item/3256808332288788.html,Shake and tilt over I2C
+DS18B20 TO-92 Temperature Sensor (UMW),1,0.58,0.58,LCSC,https://www.lcsc.com/product-detail/C376006.html,Real part (cheap AliExpress ones are often clones)
+MAX4466 Electret Mic Amplifier,1,1.74,1.74,AliExpress,https://www.aliexpress.us/item/3256805885526362.html,Loud sound detection; pick the MAX4466 option
+EEMB 402535 3.7V 320mAh LiPo Battery,1,9.99,9.99,Amazon,https://www.amazon.com/dp/B08215N9R8,Certified with protection circuit
+Tactile Push Button 6x6mm,1,0.10,0.10,AliExpress,https://www.aliexpress.us/item/3256807751442375.html,Pet / wake button
+4.7k Ohm 1/4W Through-Hole Resistor (100 pcs),1,0.01,0.01,LCSC,https://lcsc.com/product-detail/Carbon-Film-Resistors_4-7KR-472-5_C120071.html,DS18B20 OneWire pull-up; 100 is LCSC minimum
+JST-PH 2.0 Female Connector,1,0.50,0.50,AliExpress,https://www.aliexpress.us/item/3256805611374476.html,Battery connector on the PCB
+30AWG Silicone Wire (5 colors),1,6.96,6.96,AliExpress,https://www.aliexpress.us/item/3256808281675998.html,Internal wiring; pick the 30AWG option
+Prototype Board 5x7cm 1.2mm (10 pcs),1,0.43,0.43,AliExpress,https://www.aliexpress.us/item/3256807718543888.html,Cut into a circle to solder modules behind the eye
+Round Spring Carabiner Keyrings (10 pcs),1,0.30,0.30,AliExpress,https://www.aliexpress.us/item/3256807751442375.html,Pants and bag clip
+Stainless Steel Split Key Rings 25mm (10 pcs),1,0.15,0.15,AliExpress,https://www.aliexpress.us/item/3256805611374476.html,Goes through the keyring hole in the shell
+Creality PETG Filament 1.75mm 1kg,1,14.81,14.81,AliExpress,https://www.aliexpress.us/item/3256812523172305.html,3D-printed heart shell
+Rust-Oleum Plastic Primer 12oz,1,6.97,6.97,Amazon,https://www.amazon.com/dp/B003CT498U,Chrome finish (optional); aerosol can't ship from China
+Rust-Oleum Bright Coat Metallic Chrome Spray 11oz,1,6.47,6.47,Amazon,https://www.amazon.com/dp/B000Z8DGXK,Chrome finish (optional); aerosol can't ship from China
+,,,,,,
+TOTAL (parts only),,,60.37,,,Before shipping and import fees
