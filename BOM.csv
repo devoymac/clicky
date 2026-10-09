@@ -1,19 +1,16 @@
-Item Name,Quantity,Unit Price (USD),Total Price (USD),Supplier,Link,Notes
-Seeed Studio XIAO ESP32-C3,1,4.99,4.99,Seeed Studio,https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html,MCU with built-in LiPo charger; genuine board
-GC9A01 1.28in Round TFT 240x240 SPI,1,4.48,4.48,AliExpress,https://www.aliexpress.us/item/3256808098235758.html,The pet's animated eye
-GY-521 MPU6050 Accelerometer/Gyro,1,1.88,1.88,AliExpress,https://www.aliexpress.us/item/3256808332288788.html,Shake and tilt over I2C
-DS18B20 TO-92 Temperature Sensor (UMW),1,0.58,0.58,LCSC,https://www.lcsc.com/product-detail/C376006.html,Real part (cheap AliExpress ones are often clones)
-MAX4466 Electret Mic Amplifier,1,1.74,1.74,AliExpress,https://www.aliexpress.us/item/3256805885526362.html,Loud sound detection; pick the MAX4466 option
-EEMB 402535 3.7V 320mAh LiPo Battery,1,9.99,9.99,Amazon,https://www.amazon.com/dp/B08215N9R8,Certified with protection circuit
-Tactile Push Button 6x6mm,1,0.10,0.10,AliExpress,https://www.aliexpress.us/item/3256807751442375.html,Pet / wake button
-4.7k Ohm 1/4W Through-Hole Resistor (100 pcs),1,0.01,0.01,LCSC,https://lcsc.com/product-detail/Carbon-Film-Resistors_4-7KR-472-5_C120071.html,DS18B20 OneWire pull-up; 100 is LCSC minimum
-JST-PH 2.0 Female Connector,1,0.50,0.50,AliExpress,https://www.aliexpress.us/item/3256805611374476.html,Battery connector on the PCB
-30AWG Silicone Wire (5 colors),1,6.96,6.96,AliExpress,https://www.aliexpress.us/item/3256808281675998.html,Internal wiring; pick the 30AWG option
-Prototype Board 5x7cm 1.2mm (10 pcs),1,0.43,0.43,AliExpress,https://www.aliexpress.us/item/3256807718543888.html,Cut into a circle to solder modules behind the eye
-Round Spring Carabiner Keyrings (10 pcs),1,0.30,0.30,AliExpress,https://www.aliexpress.us/item/3256807751442375.html,Pants and bag clip
-Stainless Steel Split Key Rings 25mm (10 pcs),1,0.15,0.15,AliExpress,https://www.aliexpress.us/item/3256805611374476.html,Goes through the keyring hole in the shell
-Creality PETG Filament 1.75mm 1kg,1,14.81,14.81,AliExpress,https://www.aliexpress.us/item/3256812523172305.html,3D-printed heart shell
-Rust-Oleum Plastic Primer 12oz,1,6.97,6.97,Amazon,https://www.amazon.com/dp/B003CT498U,Chrome finish (optional); aerosol can't ship from China
-Rust-Oleum Bright Coat Metallic Chrome Spray 11oz,1,6.47,6.47,Amazon,https://www.amazon.com/dp/B000Z8DGXK,Chrome finish (optional); aerosol can't ship from China
-,,,,,,
-TOTAL (parts only),,,60.37,,,Before shipping and import fees
+Reference,Value,Footprint,Quantity,Description,Manufacturer,Part Number,Supplier,Unit Price (USD),Link
+U1,XIAO-ESP32-C3-SMD,Seeed_Studio_XIAO_Series:XIAO-ESP32-C3-SMD,1,MCU with built-in LiPo charger and WiFi/BLE,Seeed Studio,XIAO ESP32-C3,Seeed Studio,4.99,https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html
+U2,MPU-6000,Sensor_Motion:InvenSense_QFN-24_4x4mm_P0.5mm,1,6-axis accel/gyro (shake and tilt),InvenSense,MPU-6000 (module GY-521),AliExpress,1.88,https://www.aliexpress.us/item/3256808332288788.html
+U3,DS18B20,Package_TO_SOT_THT:TO-92_Inline,1,Temperature sensor (cold detection),Maxim (UMW),DS18B20,LCSC,0.58,https://www.lcsc.com/product-detail/C376006.html
+J1,Conn_01x02_Pin,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,1,Battery connector (JST-PH 2.0),Generic,JST-PH 2.0,AliExpress,0.50,https://www.aliexpress.us/item/3256805611374476.html
+J2,GC9A01 1.28in round TFT (7-pin),Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical,1,"Round animated-eye display (240x240, SPI)",GC9A01,GC9A01 1.28 round,AliExpress,4.48,https://www.aliexpress.us/item/3256808098235758.html
+J3,MAX4466 mic (3-pin),Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,1,Electret mic amplifier (sound detection),MAX4466,MAX4466 module,AliExpress,1.74,https://www.aliexpress.us/item/3256805885526362.html
+R1,4.7k,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal,1,DS18B20 OneWire pull-up,Generic,4.7k 1/4W,LCSC,0.01,https://lcsc.com/product-detail/Carbon-Film-Resistors_4-7KR-472-5_C120071.html
+C1,100nF,Capacitor_SMD:C_0603_1608Metric,1,MPU-6000 CPOUT decoupling,Generic,100nF 0603,AliExpress,0.05,https://www.aliexpress.us/item/3256807718543888.html
+C2,100nF,Capacitor_SMD:C_0603_1608Metric,1,MPU-6000 REGOUT decoupling,Generic,100nF 0603,AliExpress,0.05,https://www.aliexpress.us/item/3256807718543888.html
+SW1,SW_Push,Button_Switch_THT:SW_Push_6mm,1,Tactile pet/wake button,Generic,6x6mm tactile,AliExpress,0.10,https://www.aliexpress.us/item/3256807751442375.html
+-,LiPo 402535 3.7V 320mAh,n/a,1,"Battery cell (certified, with protection)",EEMB,402535 320mAh,Amazon,9.99,https://www.amazon.com/dp/B08215N9R8
+-,30AWG silicone wire (5 colors),n/a,1,Internal wiring,Generic,30AWG,AliExpress,6.96,https://www.aliexpress.us/item/3256808281675998.html
+-,Prototype board 5x7cm 1.2mm,n/a,1,Solder modules onto (cut to circle),Generic,5x7cm protoboard,AliExpress,0.43,https://www.aliexpress.us/item/3256807718543888.html
+-,PETG filament 1.75mm 1kg,n/a,1,3D-printed heart shell,Creality,PETG 1kg,AliExpress,14.81,https://www.aliexpress.us/item/3256812523172305.html
+-,Plastic primer + chrome spray,n/a,1,Chrome finish (optional),Rust-Oleum,Primer + chrome,Amazon,13.44,https://www.amazon.com/dp/B003CT498U

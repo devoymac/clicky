@@ -1,105 +1,99 @@
 # Clicky
 
-A portable, battery-powered personal "pet" — a tiny Tamagotchi-style device
-with six MX switches, an OLED face, and a low-power brain that keeps track of
-time and remembers its state even when it's been off for days.
+A portable, battery-powered heart-shaped "pet" in the style of STΛRBOY / Lil
+Guy: a round animated eye, a personality driven by sensors, and a touch button
+to pet it — it blushes when you give it affection. It runs on a single LiPo
+battery and charges through the same USB-C port it uses to program.
 
 ## What it is
 
-Clicky is a small handheld companion. You feed it, wash it, and play with it
-through six mechanical switches; it shows its mood on a small OLED screen. It
-knows when it last ate or was cleaned because it keeps a real clock running
-even while asleep, and it stores its state in non-volatile memory. The whole
-thing runs on a single LiPo battery and charges through the same USB-C port it
-uses to program.
+Clicky is a small companion you wear on your clothes or bag. Inside a
+3D-printed heart lives a round screen that acts as its eye, and a set of
+sensors give it a personality: it gets dizzy when you shake it, shivers when
+it's cold, startles at loud noises, and falls asleep if you ignore it. Touch
+it and it wakes up happy. It remembers its state across power-off.
 
 ## Design goals
 
-- **Portable and battery-powered** — one LiPo cell, no wall power needed.
-- **At least a week of battery life** on a single charge.
-- **Knows the time** — can tell "2 hours since last meal" or "a whole day
-  since last wash" and react (hungry, dirty, happy).
-- **Remembers its state** across power-off.
-- **As simple as possible** — the fewest components that still do the job.
+- **Portable and battery-powered** — one small LiPo cell, no wall power.
+- **Long battery life** — low-power sleeps, dimmed display when drowsy.
+- **A living personality** — reacts to shake, cold, sound, and touch.
+- **An original touch** — the heart blushes when you pet it.
+- **Built by hand** — hand-wired to a tiny module, no complex PCB.
 
 ## Hardware
 
-### Brain: Seeed XIAO nRF52840
+### Brain: Seeed XIAO ESP32-C3
 
-The nRF52840 was chosen over the RP2040 for one decisive reason: power. It
-sleeps at ~2 µA with its RTC still running, which is what makes a week of
-battery life realistic. It also bundles everything the project needs on one
-tiny board:
+A thumb-sized module with a built-in LiPo charger, WiFi/BLE, and plenty of
+GPIOs, chosen over the nRF52840 for its lower cost and simplicity:
 
-- **Built-in LiPo charger** (BQ25101) — no external charging IC required.
-  Plug in USB-C to charge; unplug to run on battery. Automatic.
-- **Internal low-power RTC** — keeps the clock alive in sleep, so Clicky
-  always knows how much time has passed.
-- **Onboard flash** — stores the pet's state (last feed, last wash, mood)
-  without an external EEPROM.
-- **BLE** — headroom for a future phone companion app.
+- **Built-in LiPo charger** — no external charging IC required. Plug in USB-C
+  to charge; unplug to run on battery. Automatic.
+- **WiFi + BLE** — headroom for a future phone companion or notifications.
 - **USB-C** — programming and charging share the same port.
+- **Low-power sleep** — dozes in µA range, waking on the touch button.
+
+### The eye: GC9A01 1.28" round display
+
+A 240x240 round SPI display that shows Clicky's expressions. Note: the
+chosen module has no separate backlight pin — the backlight is tied to 3V3
+internally, so the firmware should put the display to sleep instead of just
+dimming it, to save battery when it dozes.
+
+### The personality (sensors)
+
+- **MPU-6000** (motion) — shake and tilt: dizzy, angry, look-downhill.
+- **DS18B20** (temperature) — cold: shiver, then freeze with a blue tint.
+- **MAX4466** (microphone amp) — loud sounds: startled, nervous.
+
+### Interaction
+
+- One tactile push button — pet the heart, it blushes and wakes up.
 
 ### Power
 
-- Battery: a ~1000 mAh LiPo reused from a PS4 controller (has built-in
-  protection). Connected to the XIAO's BAT+/BAT- pads via a JST-PH 2.0
-  connector.
-- Charging: handled by the XIAO's onboard charger at 50-100 mA (~10-12 h for
-  a full charge — fine for overnight).
-- A 0.1 F supercapacitor across the battery keeps the RTC alive if the cell
-  ever fully drains.
+- A small certified LiPo (~320 mAh, e.g. 402535) with built-in protection,
+  charged through the XIAO's own USB-C. Verify polarity before soldering
+  (red = +, black = -).
 
-### Input & display
+## Schematic (current state)
 
-- 6 MX switches in a 3x2 matrix with 1N4148 diodes (standard keyboard matrix).
-  Switches draw ~0 mA at rest — they don't affect battery life.
-- OLED 128x64 (SSD1306) over I2C — the pet's face. This is the biggest power
-  consumer (~25 mA lit), so firmware lights it only during interaction.
-- One tactile button to wake/sleep the device.
+The KiCad schematic is complete and validated by ERC. All nets are connected:
+power (3V3/GND), I2C (MPU), 1-Wire (DS18B20 with 4.7k pull-up), SPI (display),
+the microphone, the pet button, and the battery (VBAT). The remaining ERC
+notices are intentional free pins and CLI false positives.
 
-### Why no extra chips
-
-Every "extra" a naive design would add is already inside the nRF52840:
-charger, RTC, and flash. The final BOM is just the XIAO, the battery, the
-OLED, six switches, six diodes, a button, a supercap, and a connector.
-
-## Firmware
-
-The logic is simple timestamp math, not live counting:
-
-1. When you feed or wash Clicky, store the current time as a timestamp.
-2. On wake, read the RTC, compute `delta = now - lastEvent`.
-3. Map the delta to a state (e.g. >2 h since feed = hungry, >24 h since wash
-   = dirty) and show it on the OLED.
-4. Save state to flash, then sleep at ~2 µA until the button wakes it.
-
-### Libraries (Arduino)
-
-- Board package: **Seeed nRF52 Boards** (Arduino Boards Manager).
-- Display: **Adafruit SSD1306** + **Adafruit GFX Library**.
-- I2C: **Wire** (built-in).
-- Time / sleep / flash: built into the Seeed BSP — no extra libraries.
+Note: some component footprints still need fixing before moving to PCB
+(R1, J1, SW1, J2, J3, C1, C2 use default/placeholder footprints).
 
 ## Wiring quick reference
 
-- Battery + → XIAO BAT+ ; battery - → XIAO BAT- (via JST-PH 2.0).
-- OLED: VCC → 3V3, GND → GND, SDA → D4 (P0.04), SCL → D5 (P0.05).
-- Matrix: 3 row GPIOs (D0, D1, D2) + 2 column GPIOs (D3, D6), one diode per
-  switch.
-- Wake button: D7 → GND, interrupt-driven.
-- Supercap 0.1 F between VBAT and GND.
+- Battery + → XIAO VBAT ; battery - → GND (via JST-PH 2.0).
+- Display GC9A01 (7-pin): VCC→3V3, GND→GND, SCL→D8 (SCK), SDA→D10 (MOSI),
+  DC→D6, CS→D3, RST→3V3.
+- MPU-6000 (I2C): VDD→3V3, GND→GND, SDA→D4, SCL→D5, AD0→GND, CPOUT→100nF
+  to GND, REGOUT→100nF to GND.
+- DS18B20: VDD→3V3, GND→GND, DQ→D6 + 4.7kΩ pull-up to 3V3.
+- Mic MAX4466: VCC→3V3, GND→GND, OUT→D1.
+- Pet button: one pin→D0, other→GND.
+
+## Firmware (planned)
+
+Sensor-driven moods driven by simple timestamps (last interaction, timeout to
+doze/sleep) plus sensor triggers. Libraries: TFT_eSPI (display), Adafruit
+MPU6050 + Unified Sensor, DallasTemperature + OneWire, ADC for the mic.
 
 ## Bill of Materials
 
-See [BOM.md](BOM.md) for the full parts list with prices (~$16 total, or
-~$24 if the battery is bought new).
+See [BOM.md](BOM.md) for the full parts list with prices (~$60 parts).
 
 ## Status
 
-- [x] Requirements and architecture decided
-- [x] BOM finalized
-- [ ] Schematic updated from RP2040 to XIAO nRF52840 (in progress)
+- [x] Architecture decided (heart-shaped pet, ESP32-C3, sensors + touch)
+- [x] BOM finalized (~$60)
+- [x] Schematic wired and ERC-validated
+- [ ] Fix remaining component footprints (R1, J1, SW1, J2, J3, C1, C2)
 - [ ] PCB layout
-- [ ] Firmware (state machine + RTC + sleep)
-- [ ] Enclosure
+- [ ] 3D heart shell (OpenSCAD)
+- [ ] Firmware
