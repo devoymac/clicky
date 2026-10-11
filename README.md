@@ -57,19 +57,18 @@ dimming it, to save battery when it dozes.
   charged through the XIAO's own USB-C. Verify polarity before soldering
   (red = +, black = -).
 
-## Schematic (current state)
+## Schematic
 
 The KiCad schematic is complete and validated by ERC. All nets are connected:
 power (3V3/GND), I2C (MPU), 1-Wire (DS18B20 with 4.7k pull-up), SPI (display),
 the microphone, the pet button, and the battery (VBAT). The remaining ERC
 notices are intentional free pins and CLI false positives.
 
-Note: some component footprints still need fixing before moving to PCB
-(R1, J1, SW1, J2, J3, C1, C2 use default/placeholder footprints).
+![Clicky schematic](assets/schematic.png)
 
-## Board preview
+## PCB
 
-![Clicky PCB — all components placed](assets/board.png)
+![Clicky PCB — heart-shaped layout](assets/pcb.png)
 
 ## Wiring quick reference
 
@@ -78,8 +77,7 @@ Note: some component footprints still need fixing before moving to PCB
   DC→D6, CS→D3, RST→3V3.
 - MPU-6000 (I2C): VDD→3V3, GND→GND, SDA→D4, SCL→D5, AD0→GND, CPOUT→100nF
   to GND, REGOUT→100nF to GND.
-- DS18B20: VDD→3V3, GND→GND, DQ→D7. *(R1 should pull DQ to 3V3, but the
-  current schematic ties it to GND — fix before trusting the cold mood.)*
+- DS18B20: VDD→3V3, GND→GND, DQ→D7. R1 pulls DQ up to 3V3 (4.7k).
 - Mic MAX4466: VCC→3V3, GND→GND, OUT→D1.
 - Pet button: one pin→D0, other→GND.
 
@@ -96,14 +94,3 @@ Setup steps, board/library install and the TFT_eSPI GC9A01 config are in
 ## Bill of Materials
 
 See [BOM.md](BOM.md) for the full parts list with prices (~$60 parts).
-
-## Status
-
-- [x] Architecture decided (heart-shaped pet, ESP32-C3, sensors + touch)
-- [x] BOM finalized (~$60)
-- [x] Schematic wired and ERC-validated
-- [x] Firmware scaffold (Arduino IDE, compiles for XIAO ESP32-C3)
-- [ ] Fix remaining component footprints (R1, J1, SW1, J2, J3, C1, C2)
-- [ ] PCB layout
-- [ ] 3D heart shell (OpenSCAD)
-- [ ] Firmware: full mood logic + low-power tuning

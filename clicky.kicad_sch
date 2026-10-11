@@ -2393,16 +2393,6 @@
 		)
 		(uuid "083dea2d-e192-48f4-901f-648537cb6e09")
 	)
-	(label "gnd"
-		(at 186.69 100.33 270)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0d7cb8e9-6fb8-4206-aefa-4f573aa4cce6")
-	)
 	(label "lcd_cs"
 		(at 107.95 69.85 180)
 		(effects
@@ -2472,6 +2462,16 @@
 			(justify right bottom)
 		)
 		(uuid "3a8b1609-0ccd-495a-a81e-597f762caa5a")
+	)
+	(label "3v3"
+		(at 186.69 100.33 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3c5026ad-0af3-4cab-95c1-eb3d05d4704b")
 	)
 	(label "lcd_dc"
 		(at 185.42 130.81 180)
