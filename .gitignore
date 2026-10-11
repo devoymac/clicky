@@ -1,0 +1,11 @@
+# Editor / history plugin state
+.history/
+
+# Regenerable KiCad PCB 3D exports and reports
+clicky_pcb.glb
+clicky_pcb.step
+clicky_pcb.stl
+clicky_pcb_binary.stl
+clicky_pcb_new.step
+*.statistics.rpt
+*.rpt
